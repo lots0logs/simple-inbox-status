@@ -6,9 +6,9 @@
 	"description": "Displays the unread message count for Outlook.com accounts.",
 	"homepage_url": "https://github.com/lots0logs/simple-inbox-status",
 	"icons": {
-		"16": "icons/icon16.png",
-		"48": "icons/icon48.png",
-		"128": "icons/icon128.png"
+		"16": "images/icon16.png",
+		"48": "images/icon48.png",
+		"128": "images/icon128.png"
 	},
 	"background": {
 		"persistent": true,
@@ -19,7 +19,7 @@
 	},
 	"browser_action": {
 		"default_title": "Simple Inbox Status",
-		"default_icon": "icons/icon16.png",
+		"default_icon": "images/icon16.png",
 		"default_popup": ""
 	},
 	"permissions": [
