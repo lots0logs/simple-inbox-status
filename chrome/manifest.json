@@ -1,0 +1,51 @@
+{
+	"name": "Simple Inbox Status for Outlook.com",
+	"short_name": "ET Support",
+	"version": "1.0.2",
+	"manifest_version": 2,
+	"description": "Displays the unread message count for Outlook.com accounts.",
+	"homepage_url": "https://github.com/lots0logs/simple-inbox-status",
+	"icons": {
+		"16": "icons/icon16.png",
+		"48": "icons/icon48.png",
+		"128": "icons/icon128.png"
+	},
+	"background": {
+		"persistent": true,
+		"scripts": [
+			"src/lib/jwt-decode.min.js",
+			"src/background.js"
+		]
+	},
+	"browser_action": {
+		"default_title": "Simple Inbox Status",
+		"default_icon": "icons/icon16.png",
+		"default_popup": ""
+	},
+	"permissions": [
+		"alarms",
+		"tabs",
+		"webRequest",
+		"webRequestBlocking",
+		"storage",
+		"identity",
+		"https://login.microsoftonline.com/*",
+		"https://graph.microsoft.com/v2.0/*",
+		"https://outlook.office.com/api/v2.0/*"
+	],
+	"oauth2": {
+		"client_id": "48582e3b-c453-4be4-9f7b-8a512fe86a60",
+		"scopes": [
+			"openid",
+			"profile",
+			"https://outlook.office.com/mail.read"
+		],
+		"auth_url": "https://login.microsoftonline.com/common/oauth2/v2.0/authorize?",
+		"api_endpoint": "https://outlook.office.com/api/v2.0"
+	},
+	"web_accessible_resources": [
+		"src/lib/*.js",
+		"src/*.js"
+	],
+	"key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAg5TZTzou5ij3d5crf45352/+NBrRT2mWoypi8TP2U8UeEYmNrGtoCZkJs+A8V7Cug7PQvk9fvYU6z3gkTGAuidGT/n26YQuG3XVoQiSkzo1KlF+ykTcDNUdIbPtd6QOx1Du85jUXzIt4bkVG2Oix7SrkF+ZorKvoGs/FXphpx29QKYJE851LyX5SMnbiFImNrwVzDWg6cOpQjPzIK894gY0r9kqiPW1JzIKK8/yplT4874poXq5WQ5QeMlrIeLx6oo1DOzTeVprTdxfCQY3n9UkC9E48Z4VOiy+MDO6nClZ4I/xg2I3dxVKrkJZD+4gd7kgLmXvVAMqLmvd7LNk2PQIDAQAB"
+}
