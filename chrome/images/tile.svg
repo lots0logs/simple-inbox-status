@@ -1,0 +1,357 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   viewBox="0 0 111.26318 112.22146"
+   version="1.1"
+   id="svg69"
+   sodipodi:docname="tile.svg"
+   width="111.26318"
+   height="112.22146"
+   inkscape:version="0.92.1 r"
+   inkscape:export-filename="/home/dustin/github/lots0logs/simple-inbox-status/chrome/images/tile_small.png"
+   inkscape:export-xdpi="80"
+   inkscape:export-ydpi="80">
+  <metadata
+     id="metadata73">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1920"
+     inkscape:window-height="1011"
+     id="namedview71"
+     showgrid="false"
+     inkscape:zoom="1"
+     inkscape:cx="-8.666626"
+     inkscape:cy="62.84878"
+     inkscape:window-x="0"
+     inkscape:window-y="40"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg69"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0" />
+  <defs
+     id="defs17">
+    <linearGradient
+       id="linearGradient3764"
+       x1="1"
+       x2="47"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(6.09,0,0,9.5652174,-170.16001,-8.5440336)">
+      <stop
+         stop-color="#3d3d3d"
+         stop-opacity="1"
+         id="stop2" />
+      <stop
+         offset="1"
+         stop-color="#474747"
+         stop-opacity="1"
+         id="stop4" />
+    </linearGradient>
+    <clipPath
+       id="clipPath-774818228">
+      <g
+         transform="translate(0,-1004.3622)"
+         id="g9">
+        <rect
+           rx="4"
+           y="1005.36"
+           x="1"
+           height="46"
+           width="46"
+           id="rect7"
+           style="fill:#1890d0" />
+      </g>
+    </clipPath>
+    <clipPath
+       id="clipPath-788432134">
+      <g
+         transform="translate(0,-1004.3622)"
+         id="g14">
+        <rect
+           rx="4"
+           y="1005.36"
+           x="1"
+           height="46"
+           width="46"
+           id="rect12"
+           style="fill:#1890d0" />
+      </g>
+    </clipPath>
+    <filter
+       style="color-interpolation-filters:sRGB"
+       inkscape:label="Colorize"
+       id="filter4567">
+      <feComposite
+         in2="SourceGraphic"
+         operator="arithmetic"
+         k1="1"
+         k2="1.87905e-14"
+         result="composite1"
+         id="feComposite4553"
+         k3="0"
+         k4="0" />
+      <feColorMatrix
+         in="composite1"
+         values="1"
+         type="saturate"
+         result="colormatrix1"
+         id="feColorMatrix4555" />
+      <feFlood
+         flood-opacity="1"
+         flood-color="rgb(0,114,198)"
+         result="flood1"
+         id="feFlood4557" />
+      <feBlend
+         in="flood1"
+         in2="colormatrix1"
+         mode="screen"
+         result="blend1"
+         id="feBlend4559" />
+      <feBlend
+         in2="blend1"
+         mode="normal"
+         result="blend2"
+         id="feBlend4561" />
+      <feColorMatrix
+         in="blend2"
+         values="1"
+         type="saturate"
+         result="colormatrix2"
+         id="feColorMatrix4563" />
+      <feComposite
+         in="colormatrix2"
+         in2="SourceGraphic"
+         operator="in"
+         result="composite2"
+         id="feComposite4565" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB;"
+       inkscape:label="Drop Shadow"
+       id="filter4667">
+      <feFlood
+         flood-opacity="1"
+         flood-color="rgb(0,26,123)"
+         result="flood"
+         id="feFlood4657" />
+      <feComposite
+         in="flood"
+         in2="SourceGraphic"
+         operator="in"
+         result="composite1"
+         id="feComposite4659" />
+      <feGaussianBlur
+         in="composite1"
+         stdDeviation="0.3"
+         result="blur"
+         id="feGaussianBlur4661" />
+      <feOffset
+         dx="0.3"
+         dy="0.5"
+         result="offset"
+         id="feOffset4663" />
+      <feComposite
+         in="SourceGraphic"
+         in2="offset"
+         operator="over"
+         result="composite2"
+         id="feComposite4665" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB;"
+       inkscape:label="Drop Shadow"
+       id="filter4679">
+      <feFlood
+         flood-opacity="1"
+         flood-color="rgb(0,26,123)"
+         result="flood"
+         id="feFlood4669" />
+      <feComposite
+         in="flood"
+         in2="SourceGraphic"
+         operator="in"
+         result="composite1"
+         id="feComposite4671" />
+      <feGaussianBlur
+         in="composite1"
+         stdDeviation="0.3"
+         result="blur"
+         id="feGaussianBlur4673" />
+      <feOffset
+         dx="0.3"
+         dy="0.5"
+         result="offset"
+         id="feOffset4675" />
+      <feComposite
+         in="SourceGraphic"
+         in2="offset"
+         operator="over"
+         result="composite2"
+         id="feComposite4677" />
+    </filter>
+  </defs>
+  <g
+     id="g25"
+     transform="matrix(3.09,0,0,3.09,-169.52491,-77.48627)">
+    <path
+       d="m 1,43 v 0.25 c 0,2.216 1.784,4 4,4 h 38 c 2.216,0 4,-1.784 4,-4 V 43 c 0,2.216 -1.784,4 -4,4 H 5 C 2.784,47 1,45.216 1,43 Z m 0,0.5 V 44 c 0,2.216 1.784,4 4,4 h 38 c 2.216,0 4,-1.784 4,-4 v -0.5 c 0,2.216 -1.784,4 -4,4 H 5 c -2.216,0 -4,-1.784 -4,-4 z"
+       id="path19"
+       inkscape:connector-curvature="0"
+       style="opacity:0.02000002" />
+    <path
+       d="m 1,43.25 v 0.25 c 0,2.216 1.784,4 4,4 h 38 c 2.216,0 4,-1.784 4,-4 v -0.25 c 0,2.216 -1.784,4 -4,4 H 5 c -2.216,0 -4,-1.784 -4,-4 z"
+       id="path21"
+       inkscape:connector-curvature="0"
+       style="opacity:0.05" />
+    <path
+       d="m 1,43 v 0.25 c 0,2.216 1.784,4 4,4 h 38 c 2.216,0 4,-1.784 4,-4 V 43 c 0,2.216 -1.784,4 -4,4 H 5 C 2.784,47 1,45.216 1,43 Z"
+       id="path23"
+       inkscape:connector-curvature="0"
+       style="opacity:0.1" />
+  </g>
+  <rect
+     style="fill:url(#linearGradient3764);fill-opacity:1;stroke-width:7.63231134;filter:url(#filter4567)"
+     id="rect27"
+     transform="rotate(-90,-70.87809,105.48682)"
+     rx="24.360001"
+     y="1"
+     x="-164.07001"
+     height="440"
+     width="280.14001" />
+  <g
+     id="g4585"
+     transform="translate(-187.36141,27.406132)">
+    <g
+       transform="matrix(4.635,0,0,4.635,120.77272,-79.97727)"
+       id="g45">
+      <g
+         id="g43"
+         clip-path="url(#clipPath-774818228)">
+        <g
+           style="opacity:0.1"
+           id="g41">
+          <!-- color: #474747 -->
+          <g
+             id="g39">
+            <path
+               style="fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none"
+               inkscape:connector-curvature="0"
+               id="path31"
+               d="m 13.777,34 h 20.445 c 1.777,0 1.777,0 1.777,-1.715 v -14.57 l -12,-7.711 -12,7.711 v 14.57 c 0,1.715 0,1.715 1.781,1.715 m 0,0" />
+            <path
+               style="fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none"
+               inkscape:connector-curvature="0"
+               id="path33"
+               d="M 14,12 V 32 H 33.996 V 12 M 14,12" />
+            <path
+               style="fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none"
+               inkscape:connector-curvature="0"
+               id="path35"
+               d="m 13.777,34 h 20.445 c 1.777,0 1.777,0 1.777,-1.68 V 18.004 l -24,14.316 c 0,1.68 0,1.68 1.781,1.68 m -0.004,0" />
+            <path
+               style="fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none"
+               inkscape:connector-curvature="0"
+               id="path37"
+               d="M 34.22,34 H 13.775 c -1.781,0 -1.781,0 -1.781,-1.68 V 18.004 l 24,14.316 c 0,1.68 0,1.68 -1.77,1.68 m 0.004,0" />
+          </g>
+        </g>
+      </g>
+    </g>
+    <g
+       transform="matrix(4.635,0,0,4.635,120.77272,-76.34227)"
+       id="g61">
+      <g
+         id="g59"
+         clip-path="url(#clipPath-788432134)">
+        <g
+           id="g57"
+           transform="translate(0,-1)">
+          <!-- color: #474747 -->
+          <g
+             id="g55">
+            <path
+               style="fill:#aaaaaa;fill-opacity:1;fill-rule:nonzero;stroke:none"
+               inkscape:connector-curvature="0"
+               id="path47"
+               d="m 13.777,34 h 20.445 c 1.777,0 1.777,0 1.777,-1.715 v -14.57 l -12,-7.711 -12,7.711 v 14.57 c 0,1.715 0,1.715 1.781,1.715 m 0,0" />
+            <path
+               style="fill:#f9f9f9;fill-opacity:1;fill-rule:nonzero;stroke:none"
+               inkscape:connector-curvature="0"
+               id="path49"
+               d="M 14,12 V 32 H 33.996 V 12 M 14,12" />
+            <path
+               style="fill:#cccccc;fill-opacity:1;fill-rule:nonzero;stroke:none"
+               inkscape:connector-curvature="0"
+               id="path51"
+               d="m 13.777,34 h 20.445 c 1.777,0 1.777,0 1.777,-1.68 V 18.004 l -24,14.316 c 0,1.68 0,1.68 1.781,1.68 m -0.004,0" />
+            <path
+               style="fill:#dedede;fill-opacity:1;fill-rule:nonzero;stroke:none"
+               inkscape:connector-curvature="0"
+               id="path53"
+               d="M 34.22,34 H 13.775 c -1.781,0 -1.781,0 -1.781,-1.68 V 18.004 l 24,14.316 c 0,1.68 0,1.68 -1.77,1.68 m 0.004,0" />
+          </g>
+        </g>
+      </g>
+    </g>
+  </g>
+  <g
+     id="g67"
+     transform="matrix(9.5652174,0,0,6.09,-184.93013,-88.2908)">
+    <g
+       transform="translate(0,-1004.3622)"
+       id="g65">
+      <path
+         d="m 1,1045.1905 c 0,0 -0.17010786,-5.447 0,2.1695 0.1701079,7.6165 1.784,4 4,4 h 38 c 2.216,0 4.105617,0.3695 4.042527,-1.7627 l -0.106317,-3.5932 c 0,2.216 -1.72021,1.3559 -3.93621,1.3559 H 5 c -2.216,0 -4,0.047 -4,-2.1695 z"
+         id="path63"
+         inkscape:connector-curvature="0"
+         style="opacity:0.1"
+         sodipodi:nodetypes="czssscssc" />
+    </g>
+  </g>
+  <text
+     xml:space="preserve"
+     style="font-style:normal;font-weight:normal;font-size:16.25px;line-height:25px;font-family:Sans;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;filter:url(#filter4667)"
+     x="-128.57408"
+     y="-31.778542"
+     id="text4589"><tspan
+       sodipodi:role="line"
+       id="tspan4587"
+       x="-128.57408"
+       y="-31.778542"
+       style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:37.33333206px;font-family:Raleway;-inkscape-font-specification:'Raleway, Medium';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1">Simple Inbox Status</tspan></text>
+  <text
+     xml:space="preserve"
+     style="font-style:normal;font-weight:normal;font-size:16.25px;line-height:25px;font-family:Sans;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;filter:url(#filter4679)"
+     x="-95.096283"
+     y="152.87213"
+     id="text4589-8"><tspan
+       sodipodi:role="line"
+       id="tspan4587-9"
+       x="-95.096283"
+       y="152.87213"
+       style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:37.33333206px;font-family:Raleway;-inkscape-font-specification:'Raleway, Medium';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1">for Outlook.com</tspan></text>
+</svg>
