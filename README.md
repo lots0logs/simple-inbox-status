@@ -1,2 +1,2 @@
 # simple-inbox-status
-Web extension that displays the unread message count for Outlook.com accounts.
+Web extension that displays unread message count for any authorized Outlook.com account.

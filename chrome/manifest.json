@@ -3,7 +3,7 @@
 	"short_name": "ET Support",
 	"version": "1.0.2",
 	"manifest_version": 2,
-	"description": "Displays the unread message count for Outlook.com accounts.",
+	"description": "Displays unread message count for any authorized Outlook.com account.",
 	"homepage_url": "https://github.com/lots0logs/simple-inbox-status",
 	"icons": {
 		"16": "images/icon16.png",
