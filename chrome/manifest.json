@@ -1,9 +1,9 @@
 {
 	"name": "Simple Inbox Status for Outlook.com",
-	"short_name": "ET Support",
-	"version": "1.0.2",
+	"short_name": "Simple Inbox Status",
+	"version": "1.0.3",
 	"manifest_version": 2,
-	"description": "Displays unread message count for any authorized Outlook.com account.",
+	"description": "Displays unread message count for an authorized Outlook.com account.",
 	"homepage_url": "https://github.com/lots0logs/simple-inbox-status",
 	"icons": {
 		"16": "images/icon16.png",
@@ -37,6 +37,7 @@
 		"client_id": "48582e3b-c453-4be4-9f7b-8a512fe86a60",
 		"scopes": [
 			"openid",
+			"email",
 			"profile",
 			"https://outlook.office.com/mail.read"
 		],

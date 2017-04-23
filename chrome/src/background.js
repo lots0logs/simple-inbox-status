@@ -56,6 +56,7 @@ function bind_this( context ) {
  * @typedef {Object} AuthResponse
  * @property {string} accessToken
  * @property {string} idToken
+ * @property {string} error_message
  */
 
 
@@ -70,6 +71,7 @@ class SimpleInboxStatus {
 
 		this.manifest         = chrome.runtime.getManifest();
 		this.mail_folders_url = `${this.manifest.oauth2.api_endpoint}/me/MailFolders`;
+		this.me_url           = `${this.manifest.oauth2.api_endpoint}/me`;
 
 		return bind_this( this );
 	}
@@ -103,67 +105,46 @@ class SimpleInboxStatus {
 		const scope        = this.manifest.oauth2.scopes.join( ' ' );
 		const query        = {
 			client_id: this.manifest.oauth2.client_id,
-			redirect_url: encodeURIComponent( redirect_url ),
-			response_type: 'id_token token',
+			redirect_uri: encodeURIComponent( redirect_url ),
+			response_type: encodeURIComponent( 'id_token token' ),
 			scope: encodeURIComponent( scope ),
 			response_mode: 'fragment',
 			nonce: this.create_nonce(),
+			state: this.create_nonce(),
 		};
+
+		this.current_nonce = query['nonce'];
 
 		if ( ! interactive ) {
 			Object.assign( query, {
+				response_type: 'token',
 				prompt: 'none',
+				domain_hint: this.user.domain_type,
+				login_hint: this.user.signin_name,
+			});
+
+		} else if ( this.user.domain_type && this.user.signin_name ) {
+			Object.assign( query, {
 				domain_hint: this.user.domain_type,
 				login_hint: this.user.signin_name,
 			});
 		}
 
-		this.current_nonce = query['nonce'];
+		const request_url     = this.generate_auth_request_url( query ),
+			  request_details = { url: request_url, interactive: interactive };
 
-		let request_url = this.manifest.oauth2.auth_url;
-
-		for ( const key of Object.keys( query ) ) {
-			request_url += `${key}=${query[ key ]}&`;
-		}
-
-		const request_details = { url: request_url, interactive: interactive };
-
-		chrome.identity.launchWebAuthFlow( request_details, result => {
-			if ( chrome.runtime.lastError ) {
-				console.error( chrome.runtime.lastError );
-				return;
-			}
-
-			result = this.parse_auth_response( result );
-
-			if ( ! this.validate_id_token( result.id_token ) ) {
-				console.error( 'Id token validation failed!' );
-				return;
-			}
-
-			this.id_token      = result.id_token;
-			this.access_token  = result.access_token;
-			this.is_authorized = true;
-
-			console.log(this);
-
-			chrome.storage.sync.set( {
-				access_token: this.access_token,
-				id_token: this.id_token,
-				user: this.user,
-				current_nonce: this.current_nonce,
-				is_authorized: this.is_authorized,
-			} );
-
-			this.fetch_message_count();
-		});
+		chrome.identity.launchWebAuthFlow( request_details, result => this.finish_auth( result, interactive ) );
 	}
 
 	calculate_total_unread_messages( mail_folders ) {
 		let count = 0;
 
 		for ( const folder of mail_folders ) {
-			count += folder['UnreadItemCount'];
+			if ( 'Archive' === folder.DisplayName ) {
+				continue;
+			}
+
+			count += folder.UnreadItemCount;
 		}
 
 		return count;
@@ -220,9 +201,64 @@ class SimpleInboxStatus {
 
 		response = await response.json();
 
-		const count = this.calculate_total_unread_messages( response['value'] );
+		const count = this.calculate_total_unread_messages( response.value );
 
 		this.update_status_badge( count );
+	}
+
+	async finish_auth( result, interactive ) {
+		if ( chrome.runtime.lastError ) {
+			console.error( chrome.runtime.lastError );
+			return;
+		}
+
+		result = this.parse_auth_response( result );
+
+		if ( ! this.validate_id_token( result.id_token ) ) {
+			if ( ! interactive ) {
+				// Try interactive auth flow
+				this.authorize();
+
+			} else {
+				console.error( `Authorization failed: ${result.error_message}` );
+			}
+
+			return;
+		}
+
+		this.id_token      = result.id_token;
+		this.access_token  = result.access_token;
+		this.is_authorized = true;
+
+		result = await this.make_remote_request( this.me_url );
+
+		if ( result.ok ) {
+			result = await result.json();
+			this.user.email = result.EmailAddress;
+		}
+
+		const sync_data = {
+			access_token: this.access_token,
+			id_token: this.id_token,
+			user: this.user,
+			current_nonce: this.current_nonce,
+			is_authorized: this.is_authorized,
+		};
+
+		chrome.storage.sync.set( sync_data, data => this.fetch_message_count() );
+	}
+
+	generate_auth_request_url( query_data ) {
+		let request_url = this.manifest.oauth2.auth_url;
+
+		const keys = Object.keys( query_data );
+
+		for ( const key of keys ) {
+			const sep = key === keys[ keys.length - 1 ] ? '' : '&';
+			request_url += `${key}=${query_data[ key ]}${sep}`;
+		}
+
+		return request_url;
 	}
 
 	async make_remote_request( url, body = null ) {
@@ -235,6 +271,10 @@ class SimpleInboxStatus {
 			}),
 		};
 
+		if ( this.user.email ) {
+			request_info.headers.append( 'x-AnchorMailbox', this.user.email );
+		}
+
 		if ( null !== body ) {
 			request_info.method = 'POST';
 			request_info.body   = body;
@@ -244,12 +284,12 @@ class SimpleInboxStatus {
 	}
 
 	onClicked() {
-		if ( this.is_authorized ) {
-			window.open( 'https://outlook.com/' );
+		if ( ! this.is_authorized ) {
+			this.authorize();
 			return;
 		}
 
-		this.authorize();
+		window.open( 'https://outlook.live.com/owa' );
 	}
 
 	/**
