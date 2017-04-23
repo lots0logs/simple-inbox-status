@@ -1,2 +1,4 @@
 .idea
-chrome.zip
+*.zip
+*.crx
+*.pem

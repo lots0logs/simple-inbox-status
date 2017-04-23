@@ -25,7 +25,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -39,14 +39,14 @@
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
      inkscape:window-width="1920"
-     inkscape:window-height="1011"
+     inkscape:window-height="1013"
      id="namedview71"
      showgrid="false"
-     inkscape:zoom="1"
-     inkscape:cx="-8.666626"
+     inkscape:zoom="2"
+     inkscape:cx="11.88509"
      inkscape:cy="62.84878"
-     inkscape:window-x="0"
-     inkscape:window-y="40"
+     inkscape:window-x="1920"
+     inkscape:window-y="0"
      inkscape:window-maximized="1"
      inkscape:current-layer="svg69"
      fit-margin-top="0"
@@ -319,18 +319,14 @@
     </g>
   </g>
   <g
-     id="g67"
-     transform="matrix(9.5652174,0,0,6.09,-184.93013,-88.2908)">
-    <g
-       transform="translate(0,-1004.3622)"
-       id="g65">
-      <path
-         d="m 1,1045.1905 c 0,0 -0.17010786,-5.447 0,2.1695 0.1701079,7.6165 1.784,4 4,4 h 38 c 2.216,0 4.105617,0.3695 4.042527,-1.7627 l -0.106317,-3.5932 c 0,2.216 -1.72021,1.3559 -3.93621,1.3559 H 5 c -2.216,0 -4,0.047 -4,-2.1695 z"
-         id="path63"
-         inkscape:connector-curvature="0"
-         style="opacity:0.1"
-         sodipodi:nodetypes="czssscssc" />
-    </g>
+     id="g65"
+     transform="matrix(9.5652174,0,0,6.09,-184.93013,-6204.8566)">
+    <path
+       sodipodi:nodetypes="czsssccssc"
+       style="opacity:0.1"
+       inkscape:connector-curvature="0"
+       id="path63"
+       d="m 1,1045.1905 v 2.1695 c 3e-7,4.1236 1.784,4 4,4 h 38 c 1.000213,0 1.862634,0.2221 2.370005,-0.2713 1.260508,-1.2258 1.577722,-2.2323 1.577722,-2.2323 l -0.01152,-2.8523 c 0,2.216 -1.72021,1.3559 -3.93621,1.3559 H 5 c -2.216,0 -4,0.047 -4,-2.1695 z" />
   </g>
   <text
      xml:space="preserve"
