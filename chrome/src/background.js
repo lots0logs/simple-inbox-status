@@ -70,7 +70,7 @@ class SimpleInboxStatus {
 		this.user          = {};
 
 		this.manifest         = chrome.runtime.getManifest();
-		this.mail_folders_url = `${this.manifest.oauth2.api_endpoint}/me/MailFolders`;
+		this.mail_folders_url = `${this.manifest.oauth2.api_endpoint}/me/MailFolders?`;
 		this.me_url           = `${this.manifest.oauth2.api_endpoint}/me`;
 
 		return bind_this( this );
@@ -130,10 +130,13 @@ class SimpleInboxStatus {
 			});
 		}
 
-		const request_url     = this.generate_auth_request_url( query ),
-			  request_details = { url: request_url, interactive: interactive };
+		return new Promise( (resolve, reject) => {
+			const
+				request_url     = this.generate_request_url( this.manifest.oauth2.auth_url, query ),
+				request_details = { url: request_url, interactive: interactive };
 
-		chrome.identity.launchWebAuthFlow( request_details, result => this.finish_auth( result, interactive ) );
+			chrome.identity.launchWebAuthFlow( request_details, result => this.finish_auth( result, interactive, resolve ) );
+		});
 	}
 
 	calculate_total_unread_messages( mail_folders ) {
@@ -182,15 +185,22 @@ class SimpleInboxStatus {
 			return;
 		}
 
-		let response = await this.make_remote_request( this.mail_folders_url );
+		const query = {
+			$filter: encodeURIComponent( 'UnreadItemCount gt 0' ),
+			$top: '50',
+		}
+
+		const url = this.generate_request_url( this.mail_folders_url, query );
+
+		let response = await this.make_remote_request( url );
 
 		if ( ! response.ok && response.status < 500 ) {
 			// Token is expired. Re-authorize.
 			const interactive = false;
 
-			this.authorize( interactive );
+			await this.authorize( interactive );
 
-			response = await this.make_remote_request( this.mail_folders_url );
+			response = await this.make_remote_request( this.mail_folders_url, query );
 		}
 
 		if ( ! response.ok ) {
@@ -206,10 +216,10 @@ class SimpleInboxStatus {
 		this.update_status_badge( count );
 	}
 
-	async finish_auth( result, interactive ) {
+	async finish_auth( result, interactive, callback ) {
 		if ( chrome.runtime.lastError ) {
 			console.error( chrome.runtime.lastError );
-			return;
+			return callback();
 		}
 
 		result = this.parse_auth_response( result );
@@ -246,24 +256,23 @@ class SimpleInboxStatus {
 		};
 
 		chrome.storage.sync.set( sync_data, data => this.fetch_message_count() );
+
+		return callback();
 	}
 
-	generate_auth_request_url( query_data ) {
-		let request_url = this.manifest.oauth2.auth_url;
-
+	generate_request_url( url, query_data ) {
 		const keys = Object.keys( query_data );
 
 		for ( const key of keys ) {
 			const sep = key === keys[ keys.length - 1 ] ? '' : '&';
-			request_url += `${key}=${query_data[ key ]}${sep}`;
+			url += `${key}=${query_data[ key ]}${sep}`;
 		}
 
-		return request_url;
+		return url;
 	}
 
 	async make_remote_request( url, body = null ) {
 		const request_info = {
-			credentials: 'include',
 			method: 'GET',
 			headers: new Headers({
 				'Authorization': `Bearer ${this.access_token}`,
@@ -280,7 +289,9 @@ class SimpleInboxStatus {
 			request_info.body   = body;
 		}
 
-		return fetch( url, request_info );
+		const response = await fetch( url, request_info );
+
+		return response;
 	}
 
 	onClicked() {
