@@ -1,7 +1,7 @@
 {
 	"name": "Simple Inbox Status for Outlook.com",
 	"short_name": "Simple Inbox Status",
-	"version": "1.0.4",
+	"version": "1.0.5",
 	"manifest_version": 2,
 	"description": "Displays unread message count for an authorized Outlook.com account.",
 	"homepage_url": "https://github.com/lots0logs/simple-inbox-status",
@@ -39,6 +39,7 @@
 			"openid",
 			"email",
 			"profile",
+			"offline_access",
 			"https://outlook.office.com/mail.read"
 		],
 		"auth_url": "https://login.microsoftonline.com/common/oauth2/v2.0/authorize?",

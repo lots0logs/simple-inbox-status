@@ -73,6 +73,10 @@ class SimpleInboxStatus {
 		this.mail_folders_url = `${this.manifest.oauth2.api_endpoint}/me/MailFolders?`;
 		this.me_url           = `${this.manifest.oauth2.api_endpoint}/me`;
 
+		this.current_auth_tab         = null;
+		this.current_auth_interactive = false;
+		this.auth_done_callbacks      = [];
+
 		return bind_this( this );
 	}
 
@@ -100,7 +104,7 @@ class SimpleInboxStatus {
 		} );
 	}
 
-	authorize( interactive = true, recursive = false ) {
+	authorize( interactive = true ) {
 		const redirect_url = chrome.identity.getRedirectURL( '/callback' );
 		const scope        = this.manifest.oauth2.scopes.join( ' ' );
 		const query        = {
@@ -119,11 +123,10 @@ class SimpleInboxStatus {
 			Object.assign( query, {
 				response_type: 'token',
 				prompt: 'none',
-				domain_hint: this.user.domain_type,
-				login_hint: this.user.signin_name,
 			});
+		}
 
-		} else if ( this.user.domain_type && this.user.signin_name ) {
+		if ( this.user && this.user.domain_type && this.user.signin_name ) {
 			Object.assign( query, {
 				domain_hint: this.user.domain_type,
 				login_hint: this.user.signin_name,
@@ -133,9 +136,16 @@ class SimpleInboxStatus {
 		return new Promise( (resolve, reject) => {
 			const
 				request_url     = this.generate_request_url( this.manifest.oauth2.auth_url, query ),
-				request_details = { url: request_url, interactive: interactive };
+				request_details = { url: request_url, active: interactive };
 
-			chrome.identity.launchWebAuthFlow( request_details, result => this.finish_auth( result, interactive, resolve ) );
+			this.auth_done_callbacks.push( resolve );
+
+			chrome.tabs.create( request_details, tab => {
+				this.current_auth_tab         = tab.id;
+				this.current_auth_interactive = interactive;
+
+				chrome.tabs.onUpdated.addListener( this.onTabUpdated );
+			} );
 		});
 	}
 
@@ -188,7 +198,7 @@ class SimpleInboxStatus {
 		const query = {
 			$filter: encodeURIComponent( 'UnreadItemCount gt 0' ),
 			$top: '50',
-		}
+		};
 
 		const url = this.generate_request_url( this.mail_folders_url, query );
 
@@ -216,16 +226,11 @@ class SimpleInboxStatus {
 		this.update_status_badge( count );
 	}
 
-	async finish_auth( result, interactive, callback ) {
-		if ( chrome.runtime.lastError ) {
-			console.error( chrome.runtime.lastError );
-			return callback();
-		}
-
+	async finish_auth( result ) {
 		result = this.parse_auth_response( result );
 
 		if ( ! this.validate_id_token( result.id_token ) ) {
-			if ( ! interactive ) {
+			if ( ! this.current_auth_interactive ) {
 				// Try interactive auth flow
 				this.authorize();
 
@@ -233,7 +238,7 @@ class SimpleInboxStatus {
 				console.error( `Authorization failed: ${result.error_message}` );
 			}
 
-			return;
+			return (this.auth_done_callbacks.shift())();
 		}
 
 		this.id_token      = result.id_token;
@@ -257,7 +262,7 @@ class SimpleInboxStatus {
 
 		chrome.storage.sync.set( sync_data, data => this.fetch_message_count() );
 
-		return callback();
+		return (this.auth_done_callbacks.shift())();
 	}
 
 	generate_request_url( url, query_data ) {
@@ -301,6 +306,25 @@ class SimpleInboxStatus {
 		}
 
 		window.open( 'https://outlook.live.com/owa' );
+	}
+
+	onTabUpdated( id, info, updated_tab ) {
+		if ( id !== this.current_auth_tab ) {
+			return;
+		}
+
+		if ( info.url.includes( '#access_token=' ) ) {
+			this.finish_auth( info.url )
+		} else if ( ! this.current_auth_interactive ) {
+			// Try interactive auth
+			this.authorize();
+		} else {
+			// Bail
+			(this.auth_done_callbacks.shift())();
+		}
+
+		chrome.tabs.remove( id );
+		chrome.tabs.onUpdated.removeListener( this.onTabUpdated );
 	}
 
 	/**
